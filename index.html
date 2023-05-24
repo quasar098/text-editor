@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background: black;
+                margin: 0px;
+            }
+            #editor {
+                position: absolute;
+                right: 0;
+
+                width: calc(100% - 200px);
+                height: 100%;
+            }
+            #explorer {
+                position: absolute;
+                width: 198px;
+                height: 100%;
+                background-color: rgb(33, 37, 43);
+            }
+            #explorer::after {
+                height: 100%;
+                width: 2px;
+                background-color: #181a1f;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="explorer"></div>
+        <div id="editor"></div>
+
+        <script src="ace-editor/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="ace-editor/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+        <script src="ace-editor/theme-dracula.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            let editor = ace.edit("editor", {
+                mode: "ace/mode/javascript",
+                selectionStyle: "text"
+            });
+            editor.setTheme("ace/theme/dracula");
+        </script>
+        <script src="renderer.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</html>

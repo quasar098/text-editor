@@ -1,0 +1,22 @@
+{
+  "name": "text-editor",
+  "version": "1.0.0",
+  "description": "Edit text better",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Electron",
+    "Ace",
+    "Javascript",
+    "Text",
+    "Editor"
+  ],
+  "devDependencies": {
+    "electron": "^20.1.2"
+  },
+  "dependencies": {
+    "fast-password-entropy": "^1.1.1"
+  }
+}
