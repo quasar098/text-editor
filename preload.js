@@ -5,9 +5,5 @@
  *
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
-window.addEventListener('DOMContentLoaded', () => {
 
-})
-contextBridge.exposeInMainWorld(
-  'fs'
-)
+const { contextBridge, ipcRenderer } = require('electron');

@@ -1,24 +1,45 @@
-/**
- * This file is loaded via the <script> tag in the index.html file and will
- * be executed in the renderer process for that window. No Node.js APIs are
- * available in this process because `nodeIntegration` is turned off and
- * `contextIsolation` is turned on. Use the contextBridge API in `preload.js`
- * to expose Node.js functionality from the main process.
- */
+const fs = require("fs");
+const path = require("path");
 
- function openFile(filename) {
+function setModeFromPath(thePath) {
+    var modelist = ace.require("ace/ext/modelist");
+    var mode = modelist.getModeForPath(thePath).mode;
+    editor.session.setMode(mode);
+}
 
-    //Check if file exists
-    if(fs.existsSync(filename)) {
-       let data = fs.readFileSync(filename, 'utf8').split('\n');
-       console.log(data);
+var absolutePath = "";
 
+function openFile(filename) {
+
+    setModeFromPath(filename);
+
+    // check if file exists
+    if (fs.existsSync(filename)) {
+        console.log(`Reading from ${filename}`)
+        let data = fs.readFileSync(filename, 'utf8');
+        editor.setValue(data);
     } else {
-       console.log("File Doesn\'t Exist. Creating new file.")
-       fs.writeFile(filename, '', (err) => {
-          if(err) console.log(err)
-       })
+        console.log("File Doesn\'t Exist. Creating new file.");
+        fs.writeFile(filename, '', (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
     }
- }
+    absolutePath = path.resolve(filename);
+    document.title = path.basename(absolutePath);
 
-openFile("README.md");
+    editor.clearSelection();
+}
+
+openFile("example/pasta.md");
+
+
+function init() {
+    editor.setOptions({
+        fontFamily: "Jetbrains Mono",
+        fontSize: "16px"
+    })
+}
+
+init();
